@@ -3,20 +3,22 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 6%;
-  background-color: #111111;
-  color: #ffffff;
+  padding: 22px 6%;
+  background-color: #fffaf7;
+  border-bottom: 1px solid #f0e4e5;
 }
 
 /* Brand Logo */
 .logo h2 {
-  font-size: 25px;
-  font-weight: 700;
+  font-family: Georgia, serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: #4b2e3e;
   letter-spacing: 1px;
 }
 
 .logo span {
-  color: #ff1493;
+  color: #c2185b;
 }
 
 /* Navigation Links */
@@ -31,25 +33,171 @@
 
 .nav-links a {
   text-decoration: none;
-  color: #ffffff;
+  color: #4b2e3e;
   font-size: 15px;
   transition: color 0.3s ease;
 }
 
 .nav-links a:hover {
-  color: #ff1493;
+  color: #c2185b;
 }
 
-/* Explore Button */
+/* Explore Button (navbar) */
 .explore-btn {
-  background-color: #ff1493;
-  color: #ffffff;
-  padding: 12px 25px;
-  border-radius: 5px;
+  background-color: #c2185b;
+  color: white;
+  padding: 13px 28px;
+  border-radius: 30px;
   text-decoration: none;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .explore-btn:hover {
+  background-color: #941447;
+  transform: translateY(-2px);
+}
+
+/* General Sections */
+section {
+  padding: 90px 8%;
+  scroll-margin-top: 20px;
+}
+
+section h2 {
+  font-family: Georgia, serif;
+  font-size: 36px;
+  color: #4b2e3e;
+  margin-bottom: 18px;
+}
+
+section p {
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+/* Other Sections */
+#about,
+#hair,
+#nails,
+#gallery,
+#contact {
+  min-height: 40vh;
+}
+
+/* Services */
+#services {
+  background-color: #f8e1e8;
+}
+
+/* Home Hero Section */
+.home-hero {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  min-height: 500px;
+  padding: 0;
+  overflow: hidden;
+  background-color: #111111;
+}
+
+/* Automatic Slideshow */
+.slideshow {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.slideshow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.5)
+  );
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+/* Welcome Text */
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  text-align: center;
+  color: #ffffff;
+  z-index: 2;
+}
+
+.hero-content h1 {
+  color: #ffffff;
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(32px, 5vw, 65px);
+  font-weight: 400;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.hero-content p {
+  color: #ffd6e7;
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(18px, 2.4vw, 28px);
+  font-style: normal;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Explore Button (hero) */
+.welcome-explore {
+  position: absolute;
+  left: 50%;
+  bottom: 12%;
+  transform: translateX(-50%);
+  padding: 15px 40px;
+  background-color: #ff1493;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  z-index: 2;
+}
+
+.welcome-explore:hover {
   background-color: #d60070;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  section {
+    padding: 60px 6%;
+  }
 }

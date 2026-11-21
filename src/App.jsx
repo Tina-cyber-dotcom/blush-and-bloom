@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import About from './pages/About'
 import Hair from './pages/Hair'
+import Gallery from './pages/Gallery'
 import Contact from './pages/Contact'
 import './App.css'
 
@@ -36,6 +37,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/hair" element={<Hair />} />
+        <Route path="/gallery" element={<Gallery />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
     </>

@@ -117,7 +117,13 @@ function Navbar() {
             </div>
           </div>
 
-          <Link to="/#gallery" onClick={closeMenu}>Gallery</Link>
+          <Link
+            to="/gallery"
+            onClick={closeMenu}
+            className={pathname === '/gallery' ? 'current' : ''}
+          >
+            Gallery
+          </Link>
           <Link
             to="/contact"
             onClick={closeMenu}

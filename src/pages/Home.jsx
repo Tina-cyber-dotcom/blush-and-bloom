@@ -18,21 +18,6 @@ function Home() {
           <p>Beauty, elegance and confidence.</p>
         </div>
       </section>
-
-      <section id="about">
-        <h2>About</h2>
-        <p>Add your story here.</p>
-      </section>
-
-      <section id="gallery" className="alt-bg">
-        <h2>Gallery</h2>
-        <p>Your best work will go here.</p>
-      </section>
-
-      <section id="contact">
-        <h2>Contact</h2>
-        <p>Add your phone, location and opening hours here.</p>
-      </section>
     </main>
   )
 }

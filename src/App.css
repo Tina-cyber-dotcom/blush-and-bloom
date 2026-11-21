@@ -539,3 +539,8 @@ section p {
 .coming-soon p {
   margin-bottom: 22px;
 }
+/* Braiding cards: show the top of tall photos */
+#braiding .card img {
+  height: 340px;
+  object-position: top;
+}

@@ -1,8 +1,7 @@
-import { Link } from 'react-router-dom'
 import Slideshow from '../components/Slideshow'
 
 // WhatsApp username (same as Instagram)
-const WHATSAPP_USERNAME = '@its.tina.aura'
+const WHATSAPP_USERNAME = 'its.tina.aura'
 
 // Banner photos (swap for your braiding and oil photos)
 const bannerImages = ['/images/slide-2.jpg', '/images/slide-3.jpg']
@@ -12,12 +11,11 @@ const bannerImages = ['/images/slide-2.jpg', '/images/slide-3.jpg']
 // { id: 1, name: 'Product name', size: '100 ml', price: 'KSh 1,200', image: '/images/oil-1.jpg' },
 const oils = []
 
-// BRAIDING: placeholder styles and prices. Replace with your real ones,
-// or empty this list to show "Coming soon" here too.
+// BRAIDING: add a line for each style.
 const braids = [
-  { id: 1, name: 'Box Braids', price: 'From KSh 2,500', image: '/images/braid-1.jpg' },
-  { id: 2, name: 'Cornrows', price: 'From KSh 1,000', image: '/images/braid-2.jpg' },
-  { id: 3, name: 'Knotless Braids', price: 'From KSh 3,500', image: '/images/braid-3.jpg' },
+  { id: 1, name: 'Cornrows', price: 'KSh 1,500', image: '/images/Cornrows_1.jpg' },
+  { id: 2, name: 'Fulani Braids', price: 'KSh 1,500', image: '/images/Fulani_braids_1.jpg' },
+  { id: 3, name: 'Boho Fulani Braids', price: 'KSh 2,000', image: '/images/Boho_fulani_braids_1.jpg' },
 ]
 
 function Hair() {
@@ -26,6 +24,9 @@ function Hair() {
 
   const orderLink = (name) =>
     whatsappLink(`Hello Blush & Bloom, I would like to order the ${name}.`)
+
+  const bookLink = (name) =>
+    whatsappLink(`Hello Blush & Bloom, I would like to book the ${name}.`)
 
   return (
     <main>
@@ -100,7 +101,7 @@ function Hair() {
         {braids.length === 0 ? (
           <div className="coming-soon">
             <span className="coming-soon-tag">Coming soon</span>
-            <h3>Our braiding styles and prices are on the way</h3>
+            <h3>Our braiding styles are on the way</h3>
             <p>Message us to book a braiding appointment in the meantime.</p>
             <a
               className="card-btn"
@@ -119,7 +120,14 @@ function Hair() {
                 <div className="card-body">
                   <h3>{style.name}</h3>
                   <span className="price">{style.price}</span>
-                  <Link className="card-btn" to="/#contact">Book Now</Link>
+                  <a
+                    className="card-btn"
+                    href={bookLink(style.name)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Book on WhatsApp
+                  </a>
                 </div>
               </article>
             ))}

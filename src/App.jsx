@@ -2,7 +2,9 @@ import { useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
+import About from './pages/About'
 import Hair from './pages/Hair'
+import Contact from './pages/Contact'
 import './App.css'
 
 // Scrolls to #sections when a link like /hair#braiding is clicked,
@@ -32,7 +34,9 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
         <Route path="/hair" element={<Hair />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </>
   )

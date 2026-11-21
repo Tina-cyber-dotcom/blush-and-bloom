@@ -86,7 +86,13 @@ function Navbar() {
           <Link to="/" onClick={closeMenu} className={pathname === '/' ? 'current' : ''}>
             Home
           </Link>
-          <Link to="/#about" onClick={closeMenu}>About</Link>
+          <Link
+            to="/about"
+            onClick={closeMenu}
+            className={pathname === '/about' ? 'current' : ''}
+          >
+            About
+          </Link>
 
           <div className={`has-sub ${hairOpen ? 'open' : ''}`}>
             <div className="link-row">
@@ -112,10 +118,16 @@ function Navbar() {
           </div>
 
           <Link to="/#gallery" onClick={closeMenu}>Gallery</Link>
-          <Link to="/#contact" onClick={closeMenu}>Contact</Link>
+          <Link
+            to="/contact"
+            onClick={closeMenu}
+            className={pathname === '/contact' ? 'current' : ''}
+          >
+            Contact
+          </Link>
         </nav>
 
-        <Link to="/#contact" onClick={closeMenu} className="menu-book">
+        <Link to="/contact" onClick={closeMenu} className="menu-book">
           Book Now
         </Link>
       </aside>

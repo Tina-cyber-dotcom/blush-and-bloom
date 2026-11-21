@@ -1,28 +1,125 @@
+import { useState, useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+
 function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [hairOpen, setHairOpen] = useState(false)
+  const { pathname } = useLocation()
+
+  const closeMenu = () => setMenuOpen(false)
+
+  // Lock page scroll while the panel is open, and close it with Escape
+  useEffect(() => {
+    document.body.classList.toggle('menu-open', menuOpen)
+
+    const onKey = (e) => {
+      if (e.key === 'Escape') setMenuOpen(false)
+    }
+    document.addEventListener('keydown', onKey)
+
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.body.classList.remove('menu-open')
+    }
+  }, [menuOpen])
+
   return (
-    <nav className="navbar">
+    <>
+      {/* Dark navbar */}
+      <header className="navbar">
+        <Link to="/" className="brand">
+          <span className="brand-name">
+            <span className="blush">Blush</span> <em>&amp;</em> <b>Bloom</b>
+          </span>
+          <span className="brand-by">by Tina Johnson</span>
+        </Link>
 
-      {/* Brand Logo */}
-      <div className="logo">
-        <h2>Blush <span>&</span> Bloom</h2>
-      </div>
+        <button
+          className="explore-btn"
+          onClick={() => setMenuOpen(true)}
+          aria-label="Open menu"
+        >
+          Explore <span className="dot" />
+        </button>
+      </header>
 
-      {/* Navigation Links */}
-      <ul className="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#hair">Hair</a></li>
-        <li><a href="#nails">Nails</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+      {/* Dark overlay behind the panel */}
+      <div
+        className={`menu-overlay ${menuOpen ? 'open' : ''}`}
+        onClick={closeMenu}
+      />
 
-      {/* Explore Button */}
-      <a href="#services" className="explore-btn">
-        Explore
-      </a>
+      {/* Explore panel */}
+      <aside className={`menu-panel ${menuOpen ? 'open' : ''}`} inert={!menuOpen}>
+        <div className="menu-top">
+          <div className="menu-social">
+            <a
+              href="https://www.instagram.com/its.tina.aura/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+            >
+              <i className="fa-brands fa-instagram" />
+            </a>
+            <a
+              href="https://www.tiktok.com/@i_am_imlah"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="TikTok"
+            >
+              <i className="fa-brands fa-tiktok" />
+            </a>
+          </div>
+          <button className="menu-close" onClick={closeMenu} aria-label="Close menu">
+            &times;
+          </button>
+        </div>
 
-    </nav>
+        <div className="menu-brand">
+          <span className="brand-name">
+            <span className="blush">Blush</span> <em>&amp;</em> <b>Bloom</b>
+          </span>
+          <span className="brand-by">by Tina Johnson</span>
+        </div>
+
+        <nav className="menu-links">
+          <Link to="/" onClick={closeMenu} className={pathname === '/' ? 'current' : ''}>
+            Home
+          </Link>
+          <Link to="/#about" onClick={closeMenu}>About</Link>
+
+          <div className={`has-sub ${hairOpen ? 'open' : ''}`}>
+            <div className="link-row">
+              <Link
+                to="/hair"
+                onClick={closeMenu}
+                className={pathname === '/hair' ? 'current' : ''}
+              >
+                Hair
+              </Link>
+              <button
+                className="sub-toggle"
+                onClick={() => setHairOpen(!hairOpen)}
+                aria-label="Show hair pages"
+              >
+                <i className="fa-solid fa-chevron-down" />
+              </button>
+            </div>
+            <div className="sub-links">
+              <Link to="/hair#hair-oils" onClick={closeMenu}>Hair Oils</Link>
+              <Link to="/hair#braiding" onClick={closeMenu}>Braiding</Link>
+            </div>
+          </div>
+
+          <Link to="/#gallery" onClick={closeMenu}>Gallery</Link>
+          <Link to="/#contact" onClick={closeMenu}>Contact</Link>
+        </nav>
+
+        <Link to="/#contact" onClick={closeMenu} className="menu-book">
+          Book Now
+        </Link>
+      </aside>
+    </>
   )
 }
 

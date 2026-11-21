@@ -1,66 +1,286 @@
-/* Navigation Bar */
+:root {
+  --nav-h: 80px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+/* ---------- Dark navbar ---------- */
 .navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: var(--nav-h);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 22px 6%;
-  background-color: #fffaf7;
-  border-bottom: 1px solid #f0e4e5;
+  padding: 0 6%;
+  background-color: #0d0709;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* Brand Logo */
-.logo h2 {
-  font-family: Georgia, serif;
-  font-size: 28px;
-  font-weight: 600;
-  color: #4b2e3e;
-  letter-spacing: 1px;
-}
-
-.logo span {
-  color: #c2185b;
-}
-
-/* Navigation Links */
-.nav-links {
+/* ---------- Brand ---------- */
+.brand {
   display: flex;
-  align-items: center;
-  gap: 30px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.nav-links a {
+  flex-direction: column;
   text-decoration: none;
-  color: #4b2e3e;
-  font-size: 15px;
-  transition: color 0.3s ease;
+  line-height: 1.1;
 }
 
-.nav-links a:hover {
-  color: #c2185b;
+.brand-name {
+  font-family: 'Pacifico', cursive;
+  font-size: 32px;
+  color: #fff3e8;
 }
 
-/* Explore Button (navbar) */
+.brand-name .blush {
+  color: #ff9ccb;
+}
+
+.brand-name em {
+  font-style: normal;
+  color: #ffd9a0;
+}
+
+.brand-name b {
+  font-weight: 400;
+  color: #fff3e8;
+}
+
+.brand-by {
+  font-family: Georgia, serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #ffd9a0;
+  margin-top: 2px;
+  padding-left: 4px;
+}
+
+/* ---------- Explore button ---------- */
 .explore-btn {
-  background-color: #c2185b;
-  color: white;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #ff6fb5;
+  color: #1a0b12;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
   padding: 13px 28px;
+  border: none;
   border-radius: 30px;
-  text-decoration: none;
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .explore-btn:hover {
-  background-color: #941447;
+  background-color: #ff8fc5;
   transform: translateY(-2px);
 }
 
-/* General Sections */
+.explore-btn .dot {
+  width: 10px;
+  height: 10px;
+  background: #1a0b12;
+  border-radius: 2px;
+}
+
+/* ---------- Overlay ---------- */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 90;
+}
+
+.menu-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ---------- Slide-in panel ---------- */
+.menu-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(380px, 88vw);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 18px 0 30px;
+  background: rgba(18, 9, 14, 0.96);
+  backdrop-filter: blur(8px);
+  transform: translateX(100%);
+  transition: transform 0.45s ease;
+  z-index: 100;
+  overflow-y: auto;
+}
+
+.menu-panel.open {
+  transform: translateX(0);
+}
+
+.menu-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 22px;
+}
+
+.menu-social {
+  display: flex;
+  gap: 18px;
+}
+
+.menu-social a {
+  color: #ffffff;
+  font-size: 24px;
+  transition: color 0.3s ease;
+}
+
+.menu-social a:hover {
+  color: #ff6fb5;
+}
+
+.menu-close {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 44px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.menu-close:hover {
+  color: #ff6fb5;
+  transform: rotate(90deg);
+}
+
+/* Brand inside the panel */
+.menu-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 26px 0 30px;
+  padding-bottom: 26px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.menu-brand .brand-name {
+  font-size: 40px;
+}
+
+.menu-brand .brand-by {
+  font-size: 12px;
+  letter-spacing: 5px;
+  margin-top: 6px;
+}
+
+/* Links */
+.menu-links {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-links a {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: #ffffff;
+  padding: 18px 0;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.menu-links a:hover {
+  color: #ff9ccb;
+}
+
+.menu-links a.current {
+  background: rgba(214, 70, 140, 0.65);
+  color: #ffe08a;
+}
+
+/* Hair dropdown */
+.link-row {
+  position: relative;
+}
+
+.sub-toggle {
+  position: absolute;
+  right: 26px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.sub-toggle i {
+  transition: transform 0.3s ease;
+}
+
+.has-sub.open .sub-toggle i {
+  transform: rotate(180deg);
+}
+
+.sub-links {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.has-sub.open .sub-links {
+  max-height: 200px;
+}
+
+.menu-links .sub-links a {
+  font-size: 16px;
+  font-weight: 500;
+  padding: 13px 0;
+  color: #ffd6e7;
+}
+
+/* Book Now (panel) */
+.menu-book {
+  align-self: center;
+  margin-top: auto;
+  padding: 14px 44px;
+  background: #ff6fb5;
+  color: #1a0b12;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 30px;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.menu-book:hover {
+  background: #ff8fc5;
+  transform: translateY(-2px);
+}
+
+/* ---------- General sections ---------- */
 section {
   padding: 90px 8%;
-  scroll-margin-top: 20px;
+  scroll-margin-top: calc(var(--nav-h) + 60px);
 }
 
 section h2 {
@@ -75,21 +295,17 @@ section p {
   line-height: 1.8;
 }
 
-/* Other Sections */
 #about,
-#hair,
-#nails,
 #gallery,
 #contact {
   min-height: 40vh;
 }
 
-/* Services */
-#services {
+.alt-bg {
   background-color: #f8e1e8;
 }
 
-/* Home Hero Section */
+/* ---------- Home hero ---------- */
 .home-hero {
   position: relative;
   width: 100%;
@@ -100,7 +316,12 @@ section p {
   background-color: #111111;
 }
 
-/* Automatic Slideshow */
+.page-hero {
+  height: 50vh;
+  min-height: 340px;
+}
+
+/* Automatic slideshow */
 .slideshow {
   position: absolute;
   inset: 0;
@@ -132,7 +353,7 @@ section p {
   opacity: 1;
 }
 
-/* Welcome Text */
+/* Welcome text */
 .hero-content {
   position: absolute;
   top: 50%;
@@ -158,46 +379,163 @@ section p {
   color: #ffd6e7;
   font-family: 'Pacifico', cursive;
   font-size: clamp(18px, 2.4vw, 28px);
-  font-style: normal;
   letter-spacing: 1px;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
 }
 
-/* Explore Button (hero) */
-.welcome-explore {
-  position: absolute;
-  left: 50%;
-  bottom: 12%;
-  transform: translateX(-50%);
-  padding: 15px 40px;
-  background-color: #ff1493;
+/* ---------- Hair page ---------- */
+.sub-navbar {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 40;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 16px 6%;
+  background-color: #ffffff;
+  border-bottom: 1px solid #f0e4e5;
+}
+
+.sub-navbar a {
+  text-decoration: none;
+  color: #4b2e3e;
+  font-weight: 500;
+  padding-bottom: 6px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.sub-navbar a:hover {
+  color: #c2185b;
+  border-bottom-color: #c2185b;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 28px;
+  margin-top: 35px;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(75, 46, 62, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+}
+
+.card img {
+  display: block;
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  background-color: #f0e4e5;
+}
+
+.card-body {
+  padding: 18px 18px 24px;
+}
+
+.card-body h3 {
+  font-family: Georgia, serif;
+  color: #4b2e3e;
+  margin-bottom: 4px;
+}
+
+.card-meta {
+  font-size: 14px;
+  color: #8a6f7c;
+}
+
+.price {
+  display: block;
+  margin: 6px 0 16px;
+  color: #c2185b;
+  font-weight: 600;
+}
+
+.card-btn {
+  display: inline-block;
+  padding: 11px 26px;
+  background-color: #c2185b;
   color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
+  text-decoration: none;
+  font-size: 14px;
+  border-radius: 30px;
   transition: background-color 0.3s ease;
-  z-index: 2;
 }
 
-.welcome-explore:hover {
-  background-color: #d60070;
+.card-btn:hover {
+  background-color: #941447;
 }
 
-/* Responsive Design */
+/* ---------- Responsive ---------- */
 @media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .nav-links {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-  }
-
   section {
     padding: 60px 6%;
   }
+
+  .sub-navbar {
+    gap: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --nav-h: 72px;
+  }
+
+  .brand-name {
+    font-size: 26px;
+  }
+
+  .brand-by {
+    font-size: 9px;
+    letter-spacing: 3px;
+  }
+
+  .explore-btn {
+    padding: 11px 20px;
+  }
+}
+/* ---------- Coming soon card ---------- */
+.coming-soon {
+  max-width: 560px;
+  margin: 35px auto 0;
+  padding: 40px 28px;
+  text-align: center;
+  background: #ffffff;
+  border: 2px dashed #e9b5cb;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(75, 46, 62, 0.08);
+}
+
+.coming-soon-tag {
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 6px 18px;
+  background: #ffd6e7;
+  color: #c2185b;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-radius: 30px;
+}
+
+.coming-soon h3 {
+  font-family: Georgia, serif;
+  font-size: 24px;
+  color: #4b2e3e;
+  margin-bottom: 10px;
+}
+
+.coming-soon p {
+  margin-bottom: 22px;
 }

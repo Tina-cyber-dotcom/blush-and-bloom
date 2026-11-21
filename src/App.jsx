@@ -1,57 +1,39 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
+import Home from './pages/Home'
+import Hair from './pages/Hair'
 import './App.css'
 
-const images = [
-  '/images/slide-1.jpg',
-  '/images/slide-2.jpg',
-  '/images/slide-3.jpg',
-  '/images/slide-4.jpg'
-]
+// Scrolls to #sections when a link like /hair#braiding is clicked,
+// and back to the top when you open a new page
+function ScrollToHash() {
+  const { pathname, hash } = useLocation()
+
+  useEffect(() => {
+    if (hash) {
+      const el = document.getElementById(hash.slice(1))
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' })
+        return
+      }
+    }
+    window.scrollTo({ top: 0 })
+  }, [pathname, hash])
+
+  return null
+}
 
 function App() {
-  const [currentSlide, setCurrentSlide] = useState(0)
-
-  // Automatically change images every 5 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((previousSlide) =>
-        (previousSlide + 1) % images.length
-      )
-    }, 5000)
-
-    return () => clearInterval(interval)
-  }, [])
-
   return (
     <>
       <Navbar />
+      <ScrollToHash />
 
-      <main>
-        <section id="home" className="home-hero">
-
-          {/* Automatic Slideshow */}
-          <div className="slideshow">
-            {images.map((image, index) => (
-              <img
-                key={image}
-                src={image}
-                alt="Blush & Bloom hair inspiration"
-                className={`slide ${
-                  currentSlide === index ? 'active' : ''
-                }`}
-              />
-            ))}
-          </div>
-
-          {/* Welcome Text */}
-          <div className="hero-content">
-            <h1>Welcome to Blush & Bloom</h1>
-            <p>Beauty, elegance and confidence.</p>
-          </div>
-
-        </section>
-      </main>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/hair" element={<Hair />} />
+      </Routes>
     </>
   )
 }
